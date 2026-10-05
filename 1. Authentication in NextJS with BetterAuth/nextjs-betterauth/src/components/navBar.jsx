@@ -1,20 +1,28 @@
 "use client";
 import { useState } from "react";
-import { Link, Button } from "@heroui/react";
-import { useSession } from "@/lib/auth-client";
+import { Button, Spinner } from "@heroui/react";
+import { signOut, useSession } from "@/lib/auth-client";
+import Link from "next/link";
 
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
-    const { data: session } = useSession();
+    const { data: session, isPending } = useSession();
     console.log("user session in navBar", session);
 
-
+    if (isPending) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center gap-2">
+                <Spinner className="animate-[spin_0.4s_linear_infinite] motion-reduce:animate-none" />
+                <span className="text-xs text-muted">Loading...</span>
+            </div>
+        );
+    }
     const links = <>
         <li>
-            <Link href="#" className="block py-2">
-                Features
+            <Link href="/" className="block py-2">
+                Home
             </Link>
         </li>
         <li>
@@ -33,13 +41,18 @@ export default function NavBar() {
         {
             session?.user ?
                 <>
-                <span>Welcome, {session.user?.name}!</span>
-                <Button>Sign Out</Button>
+                    <span>Welcome, {session.user?.name}!</span>
+                    <Button onClick={() => signOut()}>Sign Out</Button>
                 </>
                 :
                 <>
-                    <Link href="#">Login</Link>
-                    <Button>Sign Up</Button>
+                    <Link href="/sign-in">Sign In</Link>
+                    <Link
+                        href="/sign-up"
+                        className="inline-flex items-center justify-center rounded-3xl bg-blue-500 px-5 py-2 font-medium text-white shadow-sm transition-all active:scale-95 "
+                    >
+                        Sign Up
+                    </Link>
                 </>
         }
     </>
