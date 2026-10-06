@@ -26,7 +26,7 @@ const SignUpPage = () => {
             email: data.email,
             password: data.password
         })
-        console.log(resdata, error);
+        console.log("After sign up",resdata, error);
     };
     return (
         <div>
