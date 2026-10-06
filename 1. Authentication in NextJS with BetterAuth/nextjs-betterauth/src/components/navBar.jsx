@@ -26,13 +26,13 @@ export default function NavBar() {
             </Link>
         </li>
         <li>
-            <Link href="#" className="block py-2 font-medium text-accent">
+            <Link href="/dashboard" className="block py-2 font-medium text-accent">
                 Dashboard
             </Link>
         </li>
         <li>
-            <Link href="#" className="block py-2">
-                Pricing
+            <Link href="/profile" className="block py-2">
+                Profile
             </Link>
         </li>
     </>
