@@ -10,4 +10,5 @@ export const { signIn,
        useSession,
         updateUser,
         requestPasswordReset,
-        resetPassword } = createAuthClient()
+        resetPassword,
+    changePassword } = createAuthClient()

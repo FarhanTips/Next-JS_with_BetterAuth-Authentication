@@ -35,6 +35,10 @@ export default function NavBar() {
                 Profile
             </Link>
         </li>
+        {
+            session?.user ? <Link href="/change-password"><li>Change Password</li></Link> : <></>
+        }
+
     </>
 
     const authLinks = <>
