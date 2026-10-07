@@ -3,11 +3,23 @@
 import { resetPassword } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 const ResetPasswordForm = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get("token");
+
+    if (!token){
+        // toast.error("Go to Forgot Password First!");
+
+        return (
+            <div>
+                <Link className="text-blue-600" href="/forgot-password">Forgot Password</Link>
+            </div>
+        );
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault();
